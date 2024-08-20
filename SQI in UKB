@@ -1,0 +1,65 @@
+###model1
+library(survival)
+ModelA<- coxph(Surv(AD_years,AD==1)~rank+AGE+SEX+APOE1+PTEDUCAT,data=Merge_poor)
+summary(ModelA)
+ModelA<- coxph(Surv(AD_years,AD==1)~rank+AGE+SEX+APOE1+PTEDUCAT,data=Merge_poor)
+summary(ModelA)
+
+###model2
+ModelA<- coxph(Surv(AD_years,AD==1)~rank+AGE+SEX+APOE1+PTEDUCAT+medication2+apnoea+hypertension+diabetes+stroke+smoking_status+hyperlipidemia+depression+anxiety+obesity,data=Merge_poor)
+summary(ModelA)
+ModelA<- coxph(Surv(AD_years,AD==1)~rank+AGE+SEX+APOE1+PTEDUCAT+medication2+apnoea+hypertension+diabetes+stroke+smoking_status+hyperlipidemia+depression+anxiety+obesity,data=Merge_poor)
+summary(ModelA)
+
+####AD subgroup
+Merge_poor_subgroup<- subset(Merge_poor,APOE1==1)
+####model1
+ModelA<- coxph(Surv(AD_years,AD==1)~quality+AGE+SEX+APOE1+PTEDUCAT,data=Merge_poor_subgroup)
+summary(ModelA)
+####model2
+ModelA<- coxph(Surv(AD_years,AD==1)~rank+AGE+SEX+APOE1+PTEDUCAT+medication2+apnoea+hypertension+diabetes+stroke+smoking_status+hyperlipidemia+depression+anxiety+obesity,data=Merge_poor_subgroup)
+summary(ModelA)
+
+
+
+#######################################################################cognition
+rm(list=ls())
+setwd("D:/file/Abiye/analysis")
+library(data.table)
+###linear regression
+###model1
+ModelA<-lm(incorrect_num~quality+AGE+SEX+APOE1+PTEDUCAT,data = Merge_cognition)
+summary(ModelA)
+###model2
+ModelA<- lm(reaction_time~quality+AGE+SEX+APOE1+PTEDUCAT+medication2+apnoea+hypertension+diabetes+stroke+smoking_status+hyperlipidemia+depression+anxiety+obesity,data=Merge_cognition)
+summary(ModelA)
+
+###ModelA<-glm(prospec_memory~quality+AGE+SEX+APOE1+PTEDUCAT,family = binomial, data = Merge_cognition)
+###ModelA<- glm(prospec_memory~quality+AGE+SEX+APOE1+PTEDUCAT+medication2+apnoea+hypertension+diabetes+stroke+smoking_status+hyperlipidemia+depression+anxiety+obesity,family = binomial, data=Merge_cognition)
+
+###cognition subgroup
+Merge_cognition_subgroup<- subset(Merge_cognition,AGE1==0)
+###model1
+ModelA<-lm(log_num_B~quality+AGE+SEX+APOE1+PTEDUCAT,data = Merge_cognition_subgroup)
+summary(ModelA)
+###model2
+ModelA<- lm(log_num_B~quality+AGE+SEX+APOE1+PTEDUCAT+medication2+apnoea+hypertension+diabetes+stroke+smoking_status+hyperlipidemia+depression+anxiety+obesity,data=Merge_cognition_subgroup)
+summary(ModelA)
+
+######################################################brain structure
+###linear regression
+###model1
+ModelA<-lm(logWMH_scale~quality+age_i2+SEX+APOE1+PTEDUCAT,data = Merge_brain_structure)
+summary(ModelA)
+###model2
+ModelA<- lm(WMV_scale~quality+age_i2+SEX+APOE1+PTEDUCAT+medication2+apnoea+hypertension+diabetes+stroke+smoking_status+hyperlipidemia+depression+anxiety+obesity,data=Merge_brain_structure)
+summary(ModelA)
+
+###brain structure subgroup
+Merge_structure_subgroup<- subset(Merge_brain_structure,APOE1==0)
+###model1
+ModelA<-lm(logWMH_scale~quality+AGE+SEX+APOE1+PTEDUCAT,data = Merge_structure_subgroup)
+summary(ModelA)
+###model2
+ModelA<- lm(logWMH_scale~quality+AGE+SEX+APOE1+PTEDUCAT+medication2+apnoea+hypertension+diabetes+stroke+smoking_status+hyperlipidemia+depression+anxiety+obesity,data=Merge_structure_subgroup)
+summary(ModelA)
